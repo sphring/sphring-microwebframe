@@ -4,3 +4,4 @@ microwebframe.helpers:
       1:
         ref:
           engine: microwebframe.engine
+          microWebFramework: microwebframe.main

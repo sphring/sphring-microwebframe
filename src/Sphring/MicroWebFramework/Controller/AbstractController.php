@@ -14,6 +14,7 @@
 namespace Sphring\MicroWebFramework\Controller;
 
 
+use Sphring\MicroWebFramework\MicroWebFramework;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -21,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  * Class AbstractController
  * @package Sphring\MicroWebFramework\Controller
  * @method \League\Plates\Engine getEngine()
+ * @method MicroWebFramework getMicroWebFramework()
  */
 abstract class AbstractController
 {

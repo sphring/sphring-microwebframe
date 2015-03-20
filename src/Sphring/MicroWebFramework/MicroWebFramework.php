@@ -180,6 +180,15 @@ class MicroWebFramework
     }
 
     /**
+     * @param $routeName
+     * @return AbstractController
+     */
+    public function getController($routeName)
+    {
+        return $this->routes[$routeName]["controller"];
+    }
+
+    /**
      * @return array
      */
     public function getPlateExtensions()
