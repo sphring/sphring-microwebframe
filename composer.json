@@ -1,0 +1,27 @@
+{
+  "name": "sphring/sphring-microwebframe",
+  "description": "It's a micro webframework which use sphring",
+  "require": {
+    "sphring/sphring": "0.10.*",
+    "composer/composer": "1.0.0-alpha9",
+    "league/route": "~1.1",
+    "league/plates": "~3.1",
+    "monolog/monolog": "~1.13",
+    "filp/whoops": "~1.1"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Arthur Halet",
+      "email": "arthurh.halet@gmail.com"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sphring\\MicroWebFramework\\": "src/Sphring/MicroWebFramework/"
+    }
+  }
+}

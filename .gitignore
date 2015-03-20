@@ -1,0 +1,6 @@
+/composer.lock
+vendor
+index.php
+*.phar
+/.idea
+logs

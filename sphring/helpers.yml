@@ -1,0 +1,6 @@
+microwebframe.helpers:
+  class: \ArrayObject
+  constructor:
+      1:
+        ref:
+          engine: microwebframe.engine

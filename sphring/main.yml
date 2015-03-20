@@ -1,0 +1,25 @@
+microwebframe.main:
+  class: Sphring\MicroWebFramework\MicroWebFramework
+  properties:
+    templateEngine:
+      ref: microwebframe.engine
+    plateExtensions:
+      ref:
+        - microwebframe.platesExtensionAsset
+        - microwebframe.platesExtensionRoute
+    router:
+      ref: microwebframe.routeCollection
+    routes:
+      yml: route.yml
+    helpers:
+      ref: microwebframe.helpers
+microwebframe.engine:
+  class: League\Plates\Engine
+  constructor:
+    1:
+      value: %CONTEXTROOT%/../view
+microwebframe.routeCollection:
+  class: League\Route\RouteCollection
+sph-import:
+  - plates-extensions.yml
+  - helpers.yml

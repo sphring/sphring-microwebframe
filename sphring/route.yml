@@ -1,0 +1,4 @@
+index:
+  route: "/"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.IndexController()
