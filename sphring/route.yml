@@ -2,3 +2,7 @@ index:
   route: "/"
   method: "GET"
   controller: !! Sphring.MicroWebFramework.Controller.IndexController()
+notfound:
+  route: "/404"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.NotFoundController()

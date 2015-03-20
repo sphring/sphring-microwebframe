@@ -17,6 +17,7 @@ namespace Sphring\MicroWebFramework;
 use League\Plates\Engine;
 use League\Route\RouteCollection;
 use Sphring\MicroWebFramework\Controller\AbstractController;
+use Sphring\MicroWebFramework\Exception\MicroWebFrameException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -58,6 +59,7 @@ class MicroWebFramework
             $this->router->addRoute($route['method'], $route['route'], function (Request $req, Response $resp, $args) use ($route) {
                 $route['controller']->setArgs($args);
                 $route['controller']->setRequest($req);
+                $route['controller']->setResponse($resp);
                 $resp->setContent($route['controller']->action());
                 return $resp;
             });
@@ -65,9 +67,14 @@ class MicroWebFramework
     }
 
 
-    public function getRoute($name)
+    public function getRouteName($name)
     {
         return $this->routes[$name]["route"];
+    }
+
+    public function getRoute($name)
+    {
+        return $this->routes[$name];
     }
 
     /**
@@ -92,16 +99,16 @@ class MicroWebFramework
     public function addRoute($routeName, $route)
     {
         if (empty($routeName)) {
-            throw new \Exception("A route name is missing.");
+            throw new MicroWebFrameException("A route name is missing.");
         }
         if (empty($route['method']) || in_array($route['method'], self::$validMethod)) {
             $route['method'] = 'GET';
         }
         if (empty($route['route'])) {
-            throw new \Exception(sprintf("Error for route '%s': route is missing.", $routeName));
+            throw new MicroWebFrameException("Error for route '%s': route is missing.", $routeName);
         }
         if (empty($route['controller']) || !($route['controller'] instanceof AbstractController)) {
-            throw new \Exception(sprintf("Error for route '%s': controller must extend '%s'.", $routeName, AbstractController::class));
+            throw new MicroWebFrameException("Error for route '%s': controller must extend '%s'.", $routeName, AbstractController::class);
         }
         $this->routes[$routeName] = $route;
     }
@@ -109,7 +116,7 @@ class MicroWebFramework
     public function __call($name, $arguments)
     {
         if (substr($name, 0, 3) !== 'get') {
-            throw new \Exception(sprintf("Method '%s' doesn't exist.", $name));
+            throw new MicroWebFrameException("Method '%s' doesn't exist.", $name);
         }
 
     }

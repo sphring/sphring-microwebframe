@@ -16,6 +16,7 @@ namespace Sphring\MicroWebFramework;
 
 use Arthurh\Sphring\Logger\LoggerSphring;
 use Arthurh\Sphring\Runner\SphringRunner;
+use League\Route\Http\Exception\NotFoundException;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +47,12 @@ class MicroWebFrameworkRunner extends SphringRunner
         $microWebFrameWork = $this->getBean('microwebframe.main');
         $dispatcher = $microWebFrameWork->getRouter()->getDispatcher();
         $request = Request::createFromGlobals();
-        $response = $dispatcher->dispatch($request->getMethod(), $request->getPathInfo());
+        try {
+            $response = $dispatcher->dispatch($request->getMethod(), $request->getPathInfo());
+        } catch (NotFoundException $e) {
+            $notFoundRoute = $microWebFrameWork->getRoute('notfound');
+            $response = $dispatcher->dispatch($notFoundRoute['method'], $notFoundRoute['route']);
+        }
 
         $response->send();
     }

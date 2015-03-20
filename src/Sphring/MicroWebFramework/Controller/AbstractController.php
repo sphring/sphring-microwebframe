@@ -15,6 +15,7 @@ namespace Sphring\MicroWebFramework\Controller;
 
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AbstractController
@@ -30,6 +31,10 @@ abstract class AbstractController
      * @var Request
      */
     protected $request;
+    /**
+     * @var Response
+     */
+    protected $response;
 
     abstract public function action();
 
@@ -108,6 +113,22 @@ abstract class AbstractController
     public function setRequest(Request $request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param Response $response
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
     }
 
 }

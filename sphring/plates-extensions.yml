@@ -1,5 +1,8 @@
 microwebframe.platesExtensionAsset:
   class: Sphring\MicroWebFramework\PlatesExtension\Asset
+  properties:
+    dir:
+      value: /assets
 microwebframe.platesExtensionRoute:
   class: Sphring\MicroWebFramework\PlatesExtension\RoutePlates
   properties:

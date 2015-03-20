@@ -5,10 +5,11 @@ use Arthurh\RestProxifier\Config;
 use Arthurh\RestProxifier\Ui\Ui;
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
+use Sphring\MicroWebFramework\Exception\MicroWebFrameException;
 use Sphring\MicroWebFramework\MicroWebFramework;
 
 
-class RoutePlates implements ExtensionInterface
+class RoutePlates extends AbstractHttpExtension implements ExtensionInterface
 {
 
     public $engine;
@@ -31,36 +32,28 @@ class RoutePlates implements ExtensionInterface
 
     public function getRoute($name)
     {
-        $route = $this->microWebFramework->getRoute($name);
-        $route = preg_replace('#\{.*\}#i', '', $route);
-        return $this->httpName . $route;
+        $route = $this->microWebFramework->getRouteName($name);
+        $args = func_get_args();
+        if (empty($route)) {
+            throw new MicroWebFrameException("The route '%s' doesn't exist.", $name);
+        }
+        $pattern = '/(\{\w*\}|\{(.+?):((\{[^\}]*\})*|[^\}])*\})/';
+        preg_match_all($pattern, $route, $tabNameInfo);
+        $nbNeededValue = count($tabNameInfo[0]);
+
+        if ($nbNeededValue > func_num_args() - 1) {
+            $nbValue = count($tabNameInfo[0]) - func_num_args() + 1;
+            throw new MicroWebFrameException("You need to follow the pattern \"%s\" miss %s values.", $route, $nbValue);
+        }
+        if ($nbNeededValue <= 0) {
+            return $this->getHttpName() . $route;
+        }
+        for ($i = 0; $i < count($tabNameInfo[0]); $i++) {
+            $route = preg_replace($pattern, $args[$i + 1], $route, 1);
+        }
+        return $this->getHttpName() . $route;
     }
 
-    /**
-     * @MethodInit
-     */
-    public function loadHttpName()
-    {
-        if (empty($_SERVER["REQUEST_SCHEME"])) {
-            if (!empty($_SERVER["HTTPS"])) {
-                $_SERVER["REQUEST_SCHEME"] = 'https';
-            } else {
-                $_SERVER["REQUEST_SCHEME"] = 'http';
-            }
-        }
-        $port = "";
-        $servername = dirname($_SERVER['SCRIPT_NAME']);
-        if ($servername == '/') {
-            $servername = null;
-        }
-        if (!($_SERVER['SERVER_PORT'] == 80 && $_SERVER["REQUEST_SCHEME"] == 'http') &&
-            !($_SERVER['SERVER_PORT'] == 443 && $_SERVER["REQUEST_SCHEME"] == 'https')
-        ) {
-            $port = ':' . $_SERVER['SERVER_PORT'];
-        }
-        $fileIndex = '/index.php';
-        $this->httpName = $_SERVER["REQUEST_SCHEME"] . '://' . $_SERVER["SERVER_NAME"] . $port . $servername . $fileIndex;
-    }
 
     /**
      * @return MicroWebFramework

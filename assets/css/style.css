@@ -3,3 +3,12 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
+
+.navbar-brand img {
+    display: block;
+    float: left;
+    height: 49px;
+    margin-left: 5px;
+    position: relative;
+    top: -15px;
+}
