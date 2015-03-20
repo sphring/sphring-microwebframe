@@ -101,7 +101,7 @@ class MicroWebFramework
         if (empty($routeName)) {
             throw new MicroWebFrameException("A route name is missing.");
         }
-        if (empty($route['method']) || in_array($route['method'], self::$validMethod)) {
+        if (empty($route['method']) || !in_array($route['method'], self::$validMethod)) {
             $route['method'] = 'GET';
         }
         if (empty($route['route'])) {
