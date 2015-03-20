@@ -8,3 +8,5 @@ microwebframe.platesExtensionRoute:
   properties:
     microWebFramework:
       ref: microwebframe.main
+    fileEndpoint:
+      value: '/index.php'
