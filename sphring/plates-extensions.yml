@@ -2,11 +2,11 @@ microwebframe.platesExtensionAsset:
   class: Sphring\MicroWebFramework\PlatesExtension\Asset
   properties:
     dir:
-      value: /assets
+      value: %config.assetsDir%
 microwebframe.platesExtensionRoute:
   class: Sphring\MicroWebFramework\PlatesExtension\RoutePlates
   properties:
     microWebFramework:
       ref: microwebframe.main
-    fileEndpoint:
-      value: '/index.php'
+    fileEntryPoint:
+      value: %config.entryPoint%

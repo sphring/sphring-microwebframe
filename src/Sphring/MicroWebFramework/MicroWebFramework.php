@@ -20,6 +20,8 @@ use Sphring\MicroWebFramework\Controller\AbstractController;
 use Sphring\MicroWebFramework\Exception\MicroWebFrameException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Whoops\Handler\PrettyPageHandler;
+use Whoops\Run;
 
 class MicroWebFramework
 {
@@ -36,6 +38,8 @@ class MicroWebFramework
 
     private $helpers = [];
 
+    private $modeDebug = true;
+
     /**
      * @var array
      */
@@ -45,11 +49,23 @@ class MicroWebFramework
     {
     }
 
+    public function loadDebug()
+    {
+        if (empty($this->modeDebug)) {
+            ini_set("display_errors", false);
+            return;
+        }
+        $whoops = new Run();
+        $whoops->pushHandler(new PrettyPageHandler());
+        $whoops->register();
+    }
+
     /**
      * @MethodInit()
      */
     public function init()
     {
+        $this->loadDebug();
         foreach ($this->plateExtensions as $extension) {
             $this->templateEngine->loadExtension($extension);
         }
@@ -203,6 +219,22 @@ class MicroWebFramework
     public function setPlateExtensions($plateExtensions)
     {
         $this->plateExtensions = $plateExtensions;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isModeDebug()
+    {
+        return $this->modeDebug;
+    }
+
+    /**
+     * @param boolean $modeDebug
+     */
+    public function setModeDebug($modeDebug)
+    {
+        $this->modeDebug = $modeDebug;
     }
 
 }

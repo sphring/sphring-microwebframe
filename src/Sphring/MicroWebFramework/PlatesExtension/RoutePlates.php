@@ -14,7 +14,7 @@ class RoutePlates extends AbstractHttpExtension implements ExtensionInterface
 
     public $engine;
     public $template;
-    private $fileEndpoint;
+    private $fileEntryPoint;
     /**
      * @var MicroWebFramework
      */
@@ -46,12 +46,12 @@ class RoutePlates extends AbstractHttpExtension implements ExtensionInterface
             throw new MicroWebFrameException("You need to follow the pattern \"%s\" miss %s values.", $route, $nbValue);
         }
         if ($nbNeededValue <= 0) {
-            return $this->getHttpName() . $this->fileEndpoint . $route;
+            return $this->getHttpName() . $this->fileEntryPoint . $route;
         }
         for ($i = 0; $i < count($tabNameInfo[0]); $i++) {
             $route = preg_replace($pattern, $args[$i + 1], $route, 1);
         }
-        return $this->getHttpName() . $this->fileEndpoint . $route;
+        return $this->getHttpName() . $this->fileEntryPoint . $route;
     }
 
 
@@ -75,17 +75,17 @@ class RoutePlates extends AbstractHttpExtension implements ExtensionInterface
     /**
      * @return mixed
      */
-    public function getFileEndpoint()
+    public function getFileEntryPoint()
     {
-        return $this->fileEndpoint;
+        return $this->fileEntryPoint;
     }
 
     /**
-     * @param mixed $fileEndpoint
+     * @param mixed $fileEntryPoint
      */
-    public function setFileEndpoint($fileEndpoint)
+    public function setFileEntryPoint($fileEntryPoint)
     {
-        $this->fileEndpoint = $fileEndpoint;
+        $this->fileEntryPoint = $fileEntryPoint;
     }
 
 }

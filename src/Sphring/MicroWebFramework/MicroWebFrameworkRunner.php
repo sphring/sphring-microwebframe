@@ -14,31 +14,12 @@
 namespace Sphring\MicroWebFramework;
 
 
-use Arthurh\Sphring\Logger\LoggerSphring;
 use Arthurh\Sphring\Runner\SphringRunner;
 use League\Route\Http\Exception\NotFoundException;
-use Monolog\Handler\RotatingFileHandler;
-use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Request;
-use Whoops\Handler\PrettyPageHandler;
-use Whoops\Run;
 
 class MicroWebFrameworkRunner extends SphringRunner
 {
-    /**
-     * @BeforeStart
-     */
-    public function beforeStart()
-    {
-        if (!defined("DEVMODE") || !DEVMODE) {
-            ini_set("display_errors", false);
-            return;
-        }
-        $whoops = new Run();
-        $whoops->pushHandler(new PrettyPageHandler());
-        $whoops->register();
-    }
-
     /**
      * @AfterLoad
      */

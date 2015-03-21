@@ -1,3 +1,5 @@
+sph-properties-file:
+  - ../config/config.yml
 microwebframe.main:
   class: Sphring\MicroWebFramework\MicroWebFramework
   properties:
@@ -10,9 +12,11 @@ microwebframe.main:
     router:
       ref: microwebframe.routeCollection
     routes:
-      yml: route.yml
+      yml: ../config/routes/route.yml
     helpers:
       ref: microwebframe.helpers
+    modeDebug:
+      value: %config.debug%
 microwebframe.engine:
   class: League\Plates\Engine
   constructor:
