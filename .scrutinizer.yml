@@ -1,7 +1,7 @@
 application:
     type: none
 filter:
-    excluded_paths: [tests/*, src/Sphring/MicroWebFramework/MicroWebFrameworkRunner.php]
+    excluded_paths: [tests/*, view/*, assets/*, config/* src/Sphring/MicroWebFramework/MicroWebFrameworkRunner.php]
 checks:
     php:
         code_rating: true

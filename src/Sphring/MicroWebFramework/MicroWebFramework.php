@@ -71,17 +71,21 @@ class MicroWebFramework
         }
         $routes = $this->routes;
         foreach ($routes as $route) {
-            $route['controller']->setHelpers($this->helpers);
-            $this->router->addRoute($route['method'], $route['route'], function (Request $req, Response $resp, $args) use ($route) {
-                $route['controller']->setArgs($args);
-                $route['controller']->setRequest($req);
-                $route['controller']->setResponse($resp);
-                $resp->setContent($route['controller']->action());
-                return $resp;
-            });
+            $this->registerRoute($route);
         }
     }
 
+    public function registerRoute(array $route)
+    {
+        $route['controller']->setHelpers($this->helpers);
+        $this->router->addRoute($route['method'], $route['route'], function (Request $req, Response $resp, $args) use ($route) {
+            $route['controller']->setArgs($args);
+            $route['controller']->setRequest($req);
+            $route['controller']->setResponse($resp);
+            $resp->setContent($route['controller']->action());
+            return $resp;
+        });
+    }
 
     public function getRouteName($name)
     {

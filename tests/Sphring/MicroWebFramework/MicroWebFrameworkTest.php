@@ -15,6 +15,7 @@ namespace Sphring\MicroWebFramework;
 
 
 use Arthurh\Sphring\Sphring;
+use Sphring\MicroWebFramework\FakeController\FakeController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -27,8 +28,42 @@ class MicroWebFrameworkTest extends \PHPUnit_Framework_TestCase
         $microWebFrameWork = $sphring->getBean('microwebframe.main');
         $dispatcher = $microWebFrameWork->getRouter()->getDispatcher();
         $request = Request::createFromGlobals();
-        $response = $dispatcher->dispatch($request->getMethod(), $request->getPathInfo());
+        $response = $dispatcher->dispatch($request->getMethod(), "/");
         $this->assertInstanceOf(Response::class, $response);
         $this->assertNotNull($response->getContent());
+    }
+
+    public function testArgs()
+    {
+        $sphring = new Sphring(__DIR__ . '/../../../sphring/main.yml');
+        $sphring->loadContext();
+        $microWebFrameWork = $sphring->getBean('microwebframe.main');
+        $route = [
+            "route" => "/test/{name}",
+            "method" => "GET",
+            "controller" => new FakeController()
+        ];
+        $microWebFrameWork->addRoute('test', $route);
+        $microWebFrameWork->registerRoute($route);
+        $dispatcher = $microWebFrameWork->getRouter()->getDispatcher();
+        $response = $dispatcher->dispatch("GET", "/test/jojo");
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals("jojo", $response->getContent());
+
+        $routeExt = $sphring->getBean('microwebframe.platesExtensionRoute');
+        $route = $routeExt->getRoute("test", "tutu");
+        $this->assertContains("/test/tutu", $route);
+    }
+
+    public function testNotFound()
+    {
+        $sphring = new Sphring(__DIR__ . '/../../../sphring/main.yml');
+        $sphring->loadContext();
+        $microWebFrameWork = $sphring->getBean('microwebframe.main');
+        $dispatcher = $microWebFrameWork->getRouter()->getDispatcher();
+        $request = Request::createFromGlobals();
+        $response = $dispatcher->dispatch($request->getMethod(), "/404");
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(404, $response->getStatusCode());
     }
 }
