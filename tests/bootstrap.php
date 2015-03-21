@@ -8,4 +8,5 @@ $loggerSphring->setLogger($logger);
 $loggerSphring->setWithFile(false);
 $loggerSphring->setWithClass(false);
 ini_set("variables_order", "EGPCS");
+
 return $loader;
