@@ -230,7 +230,7 @@ class MicroWebFramework
      */
     public function isModeDebug()
     {
-        return $this->modeDebug;
+        return !empty($this->modeDebug);
     }
 
     /**

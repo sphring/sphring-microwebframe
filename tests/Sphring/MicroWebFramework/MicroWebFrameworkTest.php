@@ -16,6 +16,7 @@ namespace Sphring\MicroWebFramework;
 
 use Arthurh\Sphring\Sphring;
 use Sphring\MicroWebFramework\FakeController\FakeController;
+use Sphring\MicroWebFramework\Mock\MockRunner;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,14 +38,21 @@ class MicroWebFrameworkTest extends \PHPUnit_Framework_TestCase
     {
         $sphring = new Sphring(__DIR__ . '/../../../sphring/main.yml');
         $sphring->loadContext();
+        $fakeController = new FakeController();
         $microWebFrameWork = $sphring->getBean('microwebframe.main');
         $route = [
             "route" => "/test/{name}",
             "method" => "GET",
-            "controller" => new FakeController()
+            "controller" => $fakeController
         ];
         $microWebFrameWork->addRoute('test', $route);
         $microWebFrameWork->registerRoute($route);
+
+        $this->assertNotEmpty($fakeController->getHelpers());
+        $this->assertEmpty($fakeController->getRequest());
+        $this->assertEmpty($fakeController->getResponse());
+
+
         $dispatcher = $microWebFrameWork->getRouter()->getDispatcher();
         $response = $dispatcher->dispatch("GET", "/test/jojo");
         $this->assertInstanceOf(Response::class, $response);
@@ -65,5 +73,14 @@ class MicroWebFrameworkTest extends \PHPUnit_Framework_TestCase
         $response = $dispatcher->dispatch($request->getMethod(), "/404");
         $this->assertInstanceOf(Response::class, $response);
         $this->assertEquals(404, $response->getStatusCode());
+    }
+
+    public function testRunner()
+    {
+        ob_start();
+        MockRunner::getInstance();
+        $content = ob_get_contents();
+        ob_end_clean();
+        $this->assertNotEmpty($content);
     }
 }

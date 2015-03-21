@@ -1,4 +1,4 @@
 config:
   entryPoint: '/index.php'
   assetsDir: '/assets'
-  debug: false
+  debug: true
