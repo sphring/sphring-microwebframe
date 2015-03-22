@@ -21,7 +21,7 @@ microwebframe.engine:
   class: League\Plates\Engine
   constructor:
     1:
-      value: %CONTEXTROOT%/../view
+      value: %CONTEXTROOT%/../app/view
 microwebframe.routeCollection:
   class: League\Route\RouteCollection
 sph-import:

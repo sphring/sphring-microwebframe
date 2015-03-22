@@ -18,6 +18,11 @@ use Arthurh\Sphring\Runner\SphringRunner;
 use League\Route\Http\Exception\NotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class MicroWebFrameworkRunner
+ * @package Sphring\MicroWebFramework
+ * @RootProject(../../../)
+ */
 class MicroWebFrameworkRunner extends SphringRunner
 {
     /**
