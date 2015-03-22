@@ -1,8 +1,6 @@
 <?php
 namespace Sphring\MicroWebFramework\PlatesExtension;
 
-use Arthurh\RestProxifier\Config;
-use Arthurh\RestProxifier\Ui\Ui;
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
 use Sphring\MicroWebFramework\Exception\MicroWebFrameException;
@@ -48,7 +46,8 @@ class RoutePlates extends AbstractHttpExtension implements ExtensionInterface
         if ($nbNeededValue <= 0) {
             return $this->getHttpName() . $this->fileEntryPoint . $route;
         }
-        for ($i = 0; $i < count($tabNameInfo[0]); $i++) {
+        $nbArgs = count($tabNameInfo[0]);
+        for ($i = 0; $i < $nbArgs; $i++) {
             $route = preg_replace($pattern, $args[$i + 1], $route, 1);
         }
         return $this->getHttpName() . $this->fileEntryPoint . $route;
