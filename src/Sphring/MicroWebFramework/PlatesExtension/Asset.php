@@ -15,6 +15,12 @@ class Asset extends AbstractHttpExtension implements ExtensionInterface
     public function register(Engine $engine)
     {
         $engine->registerFunction('asset', [$this, 'getAsset']);
+        $engine->registerFunction('favicon', [$this, 'getFavicon']);
+    }
+
+    public function getFavicon()
+    {
+        return $this->getHttpName() . '/favicon.ico';
     }
 
     public function getAsset($asset)
