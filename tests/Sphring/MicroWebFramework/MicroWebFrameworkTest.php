@@ -59,7 +59,7 @@ class MicroWebFrameworkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("jojo", $response->getContent());
 
         $routeExt = $sphring->getBean('microwebframe.platesExtensionRoute');
-        $route = $routeExt->getRoute("test", "tutu");
+        $route = $routeExt->getRoute("test", ["tutu"]);
         $this->assertContains("/test/tutu", $route);
     }
 

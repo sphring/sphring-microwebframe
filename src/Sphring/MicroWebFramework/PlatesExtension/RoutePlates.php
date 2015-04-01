@@ -28,10 +28,10 @@ class RoutePlates extends AbstractHttpExtension implements ExtensionInterface
         $engine->registerFunction('route', [$this, 'getRoute']);
     }
 
-    public function getRoute($name)
+    public function getRoute($name, array $params = [])
     {
         $route = $this->microWebFramework->getRouteName($name);
-        $args = func_get_args();
+        $args = array_merge([$name], $params);
         if (empty($route)) {
             throw new MicroWebFrameException("The route '%s' doesn't exist.", $name);
         }
