@@ -135,12 +135,12 @@ abstract class AbstractController
     /**
      * @param $route
      */
-    public function redirect($route)
+    public function redirect($route, array $params = [])
     {
         $mwf = $this->getMicroWebFramework();
         $platesExtension = $mwf->getPlateExtensions();
         $route = $platesExtension['route'];
-        $location = call_user_func_array(array($route, "getRoute"), func_get_args());
+        $location = call_user_func_array(array($route, "getRoute"), array_merge([$route], $params));
         header('Location: ' . $location);
     }
 }
