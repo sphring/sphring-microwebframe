@@ -82,7 +82,10 @@ class MicroWebFramework
             $route['controller']->setArgs($args);
             $route['controller']->setRequest($req);
             $route['controller']->setResponse($resp);
-            $resp->setContent($route['controller']->action());
+
+            $content = $route['controller']->action();
+            $resp = $route['controller']->getResponse();
+            $resp->setContent($content);
             return $resp;
         });
     }

@@ -14,6 +14,7 @@
 namespace Sphring\MicroWebFramework\Controller;
 
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -142,6 +143,6 @@ abstract class AbstractController
         $platesExtension = $mwf->getPlateExtensions();
         $routeExtension = $platesExtension['route'];
         $location = call_user_func_array(array($routeExtension, "getRoute"), array_merge([$route], $params));
-        header('Location: ' . $location);
+        $this->response = new RedirectResponse($location);
     }
 }
