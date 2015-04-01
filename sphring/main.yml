@@ -7,8 +7,8 @@ microwebframe.main:
       ref: microwebframe.engine
     plateExtensions:
       ref:
-        - microwebframe.platesExtensionAsset
-        - microwebframe.platesExtensionRoute
+        asset: microwebframe.platesExtensionAsset
+        route: microwebframe.platesExtensionRoute
     router:
       ref: microwebframe.routeCollection
     routes:

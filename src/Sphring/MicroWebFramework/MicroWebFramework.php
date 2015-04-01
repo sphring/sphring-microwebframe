@@ -49,17 +49,6 @@ class MicroWebFramework
     {
     }
 
-    public function loadDebug()
-    {
-        if (empty($this->modeDebug)) {
-            ini_set("display_errors", false);
-            return;
-        }
-        $whoops = new Run();
-        $whoops->pushHandler(new PrettyPageHandler());
-        $whoops->register();
-    }
-
     /**
      * @MethodInit()
      */
@@ -73,6 +62,17 @@ class MicroWebFramework
         foreach ($routes as $route) {
             $this->registerRoute($route);
         }
+    }
+
+    public function loadDebug()
+    {
+        if (empty($this->modeDebug)) {
+            ini_set("display_errors", false);
+            return;
+        }
+        $whoops = new Run();
+        $whoops->pushHandler(new PrettyPageHandler());
+        $whoops->register();
     }
 
     public function registerRoute(array $route)
