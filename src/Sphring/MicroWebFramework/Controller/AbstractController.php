@@ -142,6 +142,5 @@ abstract class AbstractController
         $route = $platesExtension['route'];
         $location = call_user_func_array(array($route, "getRoute"), func_get_args());
         header('Location: ' . $location);
-        exit();
     }
 }
