@@ -6,7 +6,8 @@
     "league/route": "~1.1",
     "league/plates": "~3.1",
     "monolog/monolog": "~1.13",
-    "filp/whoops": "~1.1"
+    "filp/whoops": "~1.1",
+    "maximebf/debugbar": "1.9.*"
   },
   "license": "MIT",
   "authors": [

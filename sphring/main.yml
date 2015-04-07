@@ -9,6 +9,7 @@ microwebframe.main:
       ref:
         asset: microwebframe.platesExtensionAsset
         route: microwebframe.platesExtensionRoute
+        debugBar: microwebframe.platesExtensionDebugBar
     router:
       ref: microwebframe.routeCollection
     routes:
@@ -27,3 +28,4 @@ microwebframe.routeCollection:
 sph-import:
   - plates-extensions.yml
   - helpers.yml
+  - debugbar.yml

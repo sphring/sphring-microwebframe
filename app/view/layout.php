@@ -15,6 +15,8 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo $this->asset('css/style.css'); ?>" rel="stylesheet">
+
+    <?php echo $this->debugBarRenderHead(); ?>
 </head>
 
 <body>
@@ -52,6 +54,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="<?php echo $this->asset('js/bootstrap.min.js'); ?>"></script>
+<?php echo $this->debugBarRender(); ?>
 </body>
 </html>
 

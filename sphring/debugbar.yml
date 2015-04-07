@@ -1,0 +1,22 @@
+debugbar:
+  class: Sphring\MicroWebFramework\DebugBar\MicroWebFrameworkDebugBar
+  properties:
+    collectors:
+      ref: debugbar.collectors
+debugbar.collectors:
+  class: \ArrayObject
+  constructor:
+      1:
+        ref:
+          - debugbar.collector.config
+          - debugbar.collector.routes
+debugbar.collector.config:
+  class: DebugBar\DataCollector\ConfigCollector
+  constructor:
+    1:
+      yml: ../config/config.yml
+debugbar.collector.routes:
+  class: Sphring\MicroWebFramework\DebugBar\RouteCollector
+  constructor:
+    1:
+      yml: ../config/routes/route.yml

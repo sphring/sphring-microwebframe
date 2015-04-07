@@ -5,3 +5,4 @@ microwebframe.helpers:
         ref:
           engine: microwebframe.engine
           microWebFramework: microwebframe.main
+          debugBar: debugbar

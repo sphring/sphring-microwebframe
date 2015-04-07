@@ -10,3 +10,13 @@ microwebframe.platesExtensionRoute:
       ref: microwebframe.main
     fileEntryPoint:
       value: %config.entryPoint%
+microwebframe.platesExtensionDebugBar:
+  class: Sphring\MicroWebFramework\PlatesExtension\DebugBarExtension
+  methodInit: init
+  properties:
+    debugBar:
+      ref: debugbar
+    devMode:
+      value: %config.debug%
+    dir:
+      value: %config.assetsDir%
