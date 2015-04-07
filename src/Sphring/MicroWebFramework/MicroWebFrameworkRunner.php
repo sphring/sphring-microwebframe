@@ -15,6 +15,7 @@ namespace Sphring\MicroWebFramework;
 
 
 use Arthurh\Sphring\Runner\SphringRunner;
+use DebugBar\DebugBar;
 use League\Route\Http\Exception\NotFoundException;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,16 +31,28 @@ class MicroWebFrameworkRunner extends SphringRunner
      */
     public function run()
     {
+        $debugBar = $this->getDebugBar();
+        $debugBar['time']->startMeasure('run', 'Running app');
         $microWebFrameWork = $this->getBean('microwebframe.main');
         $dispatcher = $microWebFrameWork->getRouter()->getDispatcher();
         $request = Request::createFromGlobals();
+        $debugBar['time']->startMeasure('render', 'Render route "' . $request->getPathInfo() . '"');
         try {
             $response = $dispatcher->dispatch($request->getMethod(), $request->getPathInfo());
         } catch (NotFoundException $e) {
             $notFoundRoute = $microWebFrameWork->getRoute('notfound');
             $response = $dispatcher->dispatch($notFoundRoute['method'], $notFoundRoute['route']);
         }
-
         $response->send();
+        $debugBar['time']->stopMeasure('render');
+        $debugBar['time']->stopMeasure('run');
+    }
+
+    /**
+     * @return DebugBar
+     */
+    public function getDebugBar()
+    {
+        return $this->getBean('debugbar');
     }
 }

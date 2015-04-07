@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @package Sphring\MicroWebFramework\Controller
  * @method \League\Plates\Engine getEngine()
  * @method \Sphring\MicroWebFramework\MicroWebFramework getMicroWebFramework()
+ * @method \DebugBar\DebugBar getDebugBar()
  */
 abstract class AbstractController
 {

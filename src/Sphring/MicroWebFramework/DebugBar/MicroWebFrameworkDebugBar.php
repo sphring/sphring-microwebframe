@@ -14,13 +14,22 @@ namespace Sphring\MicroWebFramework\DebugBar;
 
 
 use DebugBar\DataCollector\DataCollectorInterface;
+use DebugBar\DataCollector\MemoryCollector;
+use DebugBar\DataCollector\MessagesCollector;
+use DebugBar\DataCollector\PhpInfoCollector;
+use DebugBar\DataCollector\RequestDataCollector;
+use DebugBar\DataCollector\TimeDataCollector;
 use DebugBar\StandardDebugBar;
 
 class MicroWebFrameworkDebugBar extends StandardDebugBar
 {
     public function __construct()
     {
-        parent::__construct();
+        $this->addCollector(new PhpInfoCollector());
+        $this->addCollector(new MessagesCollector());
+        $this->addCollector(new RequestDataCollector());
+        $this->addCollector(new TimeDataCollector());
+        $this->addCollector(new MemoryCollector());
     }
 
     /**
