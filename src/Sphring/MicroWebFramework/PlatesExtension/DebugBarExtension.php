@@ -13,6 +13,7 @@
 namespace Sphring\MicroWebFramework\PlatesExtension;
 
 
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 use DebugBar\DebugBar;
 use DebugBar\JavascriptRenderer;
 use League\Plates\Engine;

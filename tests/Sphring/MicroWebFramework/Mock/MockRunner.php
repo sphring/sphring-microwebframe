@@ -11,10 +11,12 @@
  */
 namespace Sphring\MicroWebFramework\Mock;
 
+use Arthurh\Sphring\Annotations\AnnotationsSphring\AfterLoad;
+use Arthurh\Sphring\Annotations\AnnotationsSphring\RootProject;
 use Sphring\MicroWebFramework\MicroWebFrameworkRunner;
 
 /**
- * @RootProject(../../../../)
+ * @RootProject(file="../../../../")
  */
 class MockRunner extends MicroWebFrameworkRunner
 {

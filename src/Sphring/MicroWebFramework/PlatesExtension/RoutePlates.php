@@ -1,6 +1,7 @@
 <?php
 namespace Sphring\MicroWebFramework\PlatesExtension;
 
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 use League\Plates\Engine;
 use League\Plates\Extension\ExtensionInterface;
 use Sphring\MicroWebFramework\Exception\MicroWebFrameException;

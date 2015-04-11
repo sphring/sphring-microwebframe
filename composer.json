@@ -2,7 +2,7 @@
   "name": "sphring/sphring-microwebframe",
   "description": "It's a micro webframework which use sphring",
   "require": {
-    "sphring/sphring": "0.11.*",
+    "sphring/sphring": "0.12.*",
     "league/route": "~1.1",
     "league/plates": "~3.1",
     "monolog/monolog": "~1.13",

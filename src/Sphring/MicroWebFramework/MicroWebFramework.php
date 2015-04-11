@@ -14,6 +14,8 @@
 namespace Sphring\MicroWebFramework;
 
 
+use Arthurh\Sphring\Annotations\AnnotationsSphring\MethodInit;
+use Arthurh\Sphring\Annotations\AnnotationsSphring\Required;
 use League\Plates\Engine;
 use League\Route\RouteCollection;
 use Sphring\MicroWebFramework\Controller\AbstractController;
