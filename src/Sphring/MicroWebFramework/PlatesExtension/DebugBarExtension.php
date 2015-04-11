@@ -75,7 +75,7 @@ class DebugBarExtension extends AbstractHttpExtension implements ExtensionInterf
 
     /**
      * @param DebugBar $debugBar
-     * @Required
+     * @Required()
      */
     public function setDebugBar($debugBar)
     {
@@ -109,7 +109,7 @@ class DebugBarExtension extends AbstractHttpExtension implements ExtensionInterf
 
     /**
      * @param string $dir
-     * @Required
+     * @Required()
      */
     public function setDir($dir)
     {
