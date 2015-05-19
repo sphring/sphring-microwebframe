@@ -1,5 +1,5 @@
 /composer.lock
-vendor
+/vendor
 *.phar
 /.idea
 logs
